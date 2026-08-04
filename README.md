@@ -1,37 +1,28 @@
 # Brightside Dental — reservation web app
 
-A lightweight dental clinic web app: a plain HTML/CSS/JS frontend (no build step,
-no framework) talking to a small Express + SQLite backend (no external database
-server to install — SQLite is just a file).
+A lightweight dental clinic web app: a plain HTML/CSS/JS frontend (no build step or framework) connected to a small Express + SQLite backend.
 
 ```
 dental-app/
-├── backend/          Express API + SQLite storage
+├── backend/          Express API and SQLite storage
 │   ├── server.js
 │   ├── package.json
 │   └── .gitignore
-└── frontend/         Static site (open directly or serve with any static server)
+└── frontend/         Static patient and admin pages
     ├── index.html
+    ├── admin.html
     ├── style.css
-    └── app.js
+    ├── app.js
+    └── admin.js
 ```
 
 ## What it does
 
-- **Clinic info**: services (with durations), doctor bios, weekly hours, address/contact —
-  all served from one `/api/info` endpoint and rendered on the page.
-- **Reservations**: pick a service and date, see real open time slots (computed from clinic
-  hours minus existing bookings, duration-aware so a 90-minute root canal blocks the right
-  amount of time), fill in contact details, and confirm. Each booking gets a short
-  confirmation code.
-- **Manage a booking**: look up or cancel a reservation using the confirmation code —
-  no accounts or passwords needed.
-- **Admin listing**: `GET /api/admin/reservations` with header `x-admin-key: admin123`
-  (change the key via the `ADMIN_KEY` env var) returns every booking, for the front desk.
-- **Preferred dentist**: patients can optionally select a dentist while booking; the
-  preference is saved with the reservation and returned by booking lookup/admin APIs.
-- **Visit guide & treatment gallery**: the frontend includes service-specific preparation
-  guidance, patient stories, and treatment imagery loaded from Unsplash.
+- Shows clinic information, services, doctors, weekly hours, and a treatment gallery.
+- Lets patients find duration-aware available slots and make a reservation.
+- Gives each reservation a confirmation code for lookup or cancellation.
+- Lets patients optionally select a preferred dentist and leave notes.
+- Provides a protected front-desk page at `admin.html` to view all reservations.
 
 ## Running it
 
@@ -43,38 +34,35 @@ npm install
 npm start
 ```
 
-This starts the API on `http://localhost:4000` and creates `dental.db` (a single
-SQLite file) automatically on first run — nothing else to configure.
-
-Optional environment variables:
-- `PORT` — API port (default `4000`)
-- `ADMIN_KEY` — key required for the admin listing endpoint (default `admin123`)
+The API runs at `http://localhost:4000` and creates `dental.db` automatically.
 
 ### 2. Frontend
 
-The frontend is static, so any static file server works. From the `frontend/` folder:
+From a second terminal:
 
 ```bash
+cd frontend
 npx serve .
-# or: python3 -m http.server 5500
 ```
 
-Then open the printed URL (e.g. `http://localhost:5500`). The frontend expects the
-backend to be running at `http://localhost:4000` — see the `API_BASE` constant at the
-top of `app.js` if you deploy them separately (e.g. backend on Render/Fly, frontend on
-Netlify/Vercel/GitHub Pages) and need to point it at a different URL.
+Open the URL printed by the command. The patient site is `index.html` and the front-desk page is `admin.html`.
 
-## Customizing the clinic
+The frontend expects the backend at `http://localhost:4000`. If they are deployed separately, set `API_BASE` in `frontend/app.js` and `frontend/admin.js` to the deployed backend URL.
 
-Everything about the clinic — name, services, prices/durations, doctors, and weekly
-hours — lives in one place: the `CLINIC`, `SERVICES`, `DOCTORS`, and `HOURS` objects near
-the top of `backend/server.js`. Edit those and restart the server; the frontend pulls
-everything from the API so no frontend changes are needed for a re-brand.
+## Admin access
 
-## Notes on the "lightweight" design
+Open `admin.html` and enter the configured admin key. The demo default is `admin123`; change it before real use:
 
-- No React/build tooling on the frontend — just HTML/CSS/vanilla JS.
-- No Postgres/MySQL — SQLite is a single file (`dental.db`), zero setup.
-- No auth system for patients — a random confirmation code is enough for a small
-  clinic's self-service cancel/lookup flow. The admin endpoint uses a single shared
-  key rather than a full user/role system.
+```bash
+ADMIN_KEY=a-long-secret-value npm start
+```
+
+## Configuration
+
+Clinic name, services, doctors, and opening hours are defined near the top of `backend/server.js`. Update them there and restart the backend.
+
+## Notes
+
+- SQLite is file based—no external database server is required.
+- `backend/dental.db` and its working files are intentionally ignored by Git so patient data is never committed.
+- This project is a lightweight demo. A production clinic deployment needs HTTPS, stronger authentication, secret management, backups, and appropriate privacy controls.
