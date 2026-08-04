@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brightside Dental — Book a visit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 4c-3.2 0-5.6 1.6-7.2 1.6-1.6 0-2.8-1-4-1-1.3 0-1.8 1-1.8 2.4 0 3.6 1.4 9.6 3 13.6 1 2.6 2 4.4 3.6 4.4 1.8 0 2-3.2 2.6-6 .5-2.3.9-3.6 2-3.6s1.5 1.3 2 3.6c.6 2.8.8 6 2.6 6 1.6 0 2.6-1.8 3.6-4.4 1.6-4 3-10 3-13.6 0-1.4-.5-2.4-1.8-2.4-1.2 0-2.4 1-4 1C21.6 5.6 19.2 4 16 4z" fill="currentColor"/>
+        </svg>
+        <span>Brightside Dental</span>
+      </a>
+      <nav class="site-nav">
+        <a href="#services">Services</a>
+        <a href="#gallery">Treatment gallery</a>
+        <a href="#book">Book a visit</a>
+        <a href="#hours">Hours &amp; location</a>
+        <a href="#manage">Manage booking</a>
+      </nav>
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+      <a href="#book" class="btn btn-primary btn-small">Book a visit</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Bahawalpur · walk-ins welcome</p>
+          <h1>Straightforward dental care,<br> on your schedule.</h1>
+          <p class="hero-sub">Checkups, whitening, fillings, and more — see what's open today and reserve your own slot in under a minute. No phone tag.</p>
+          <div class="hero-actions">
+            <a href="#book" class="btn btn-primary">Book a visit</a>
+            <a href="#services" class="btn btn-ghost">See services</a>
+          </div>
+        </div>
+
+        <div class="ticket-wrap" aria-live="polite">
+          <div class="ticket" id="nextOpeningTicket">
+            <div class="ticket-row">
+              <span class="ticket-label">Next opening</span>
+              <span class="ticket-status" id="ticketStatus">checking…</span>
+            </div>
+            <div class="ticket-main">
+              <span class="ticket-date" id="ticketDate">—</span>
+              <span class="ticket-time" id="ticketTime">—</span>
+            </div>
+            <div class="ticket-divider"></div>
+            <div class="ticket-row ticket-foot">
+              <span>Brightside Dental</span>
+              <span>Bahawalpur</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TREATMENT GALLERY -->
+    <section id="gallery" class="section gallery-section">
+      <div class="wrap">
+        <h2 class="section-title">Care you can feel good about</h2>
+        <p class="section-sub">A calm, patient-first experience—from a routine polish to a brighter smile.</p>
+        <div class="treatment-gallery">
+          <figure class="treatment-card treatment-card-wide">
+            <img src="images/dental-checkup.jpg" alt="Dentist providing a routine dental checkup to a patient" loading="lazy">
+            <figcaption><strong>Gentle checkups</strong><span>Clear explanations at every step.</span></figcaption>
+          </figure>
+          <figure class="treatment-card">
+            <img src="images/dental-treatment.jpg" alt="Patient wearing a clear dental aligner" loading="lazy">
+            <figcaption><strong>Tailored treatment</strong><span>Options designed around your smile.</span></figcaption>
+          </figure>
+          <figure class="treatment-card">
+            <img src="images/smile-care.jpg" alt="A bright, modern dental treatment room" loading="lazy">
+            <figcaption><strong>Comfort-led care</strong><span>A calm, modern setting for every visit.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT GUIDE -->
+    <section id="visit-guide" class="section section-alt">
+      <div class="wrap guide-grid">
+        <div>
+          <h2 class="section-title">Your visit, made simple</h2>
+          <p class="section-sub">Choose a treatment to see a short, practical preparation guide.</p>
+          <div class="guide-tabs" id="guideTabs" aria-label="Treatment preparation guides"></div>
+        </div>
+        <aside class="guide-card" id="guideCard" aria-live="polite"></aside>
+      </div>
+    </section>
+
+    <!-- SYMPTOM CHECKER -->
+    <section class="section symptom-section">
+      <div class="wrap">
+        <h2 class="section-title">Not sure what you need?</h2>
+        <p class="section-sub">Tell us what's going on and we'll point you to the right visit.</p>
+        <div class="symptom-grid" id="symptomGrid">
+          <!-- populated by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section">
+      <div class="wrap">
+        <h2 class="section-title">Services</h2>
+        <p class="section-sub">Pick a service when you book — appointment length is set automatically.</p>
+        <div class="service-grid" id="serviceGrid">
+          <!-- populated by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section id="book" class="section section-alt">
+      <div class="wrap booking-grid">
+        <div>
+          <h2 class="section-title">Book a visit</h2>
+          <p class="section-sub">Choose a service and date, then pick from the open times shown.</p>
+
+          <form id="bookingForm" class="booking-form" novalidate>
+            <div class="field">
+              <label for="serviceSelect">Service</label>
+              <select id="serviceSelect" name="serviceId" required></select>
+            </div>
+
+            <div class="field">
+              <label for="doctorSelect">Preferred dentist <span class="optional">(optional)</span></label>
+              <select id="doctorSelect" name="doctorId">
+                <option value="">No preference — first available</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="dateInput">Date</label>
+              <input type="date" id="dateInput" name="date" required />
+            </div>
+
+            <div class="field">
+              <label>Available times</label>
+              <div id="slotGrid" class="slot-grid">
+                <p class="slot-hint">Choose a service and date to see open times.</p>
+              </div>
+              <input type="hidden" id="timeInput" name="time" required />
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="nameInput">Full name</label>
+                <input type="text" id="nameInput" name="patientName" required autocomplete="name" />
+              </div>
+              <div class="field">
+                <label for="phoneInput">Phone</label>
+                <input type="tel" id="phoneInput" name="phone" required autocomplete="tel" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="emailInput">Email <span class="optional">(optional)</span></label>
+              <input type="email" id="emailInput" name="email" autocomplete="email" />
+            </div>
+
+            <div class="field">
+              <label for="notesInput">Notes for the dentist <span class="optional">(optional)</span></label>
+              <textarea id="notesInput" name="notes" rows="3" placeholder="Anything we should know before your visit?"></textarea>
+            </div>
+
+            <p class="form-error" id="formError" role="alert"></p>
+
+            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Confirm reservation</button>
+          </form>
+        </div>
+
+        <div class="confirm-panel" id="confirmPanel">
+          <div class="confirm-empty" id="confirmEmpty">
+            <p>Your reservation ticket will appear here once you confirm a time.</p>
+          </div>
+          <div class="ticket ticket-confirm" id="confirmTicket" hidden>
+            <div class="ticket-row">
+              <span class="ticket-label">Reservation confirmed</span>
+              <span class="ticket-status ticket-status-ok">confirmed</span>
+            </div>
+            <div class="ticket-main">
+              <span class="ticket-date" id="confDate">—</span>
+              <span class="ticket-time" id="confTime">—</span>
+            </div>
+            <p class="ticket-service" id="confService">—</p>
+            <p class="ticket-service" id="confDoctor" hidden></p>
+            <div class="ticket-divider"></div>
+            <div class="ticket-row">
+              <span class="ticket-label">Confirmation code</span>
+              <span class="ticket-code" id="confCode">—</span>
+            </div>
+            <p class="ticket-note">Save this code — you'll need it to look up or cancel your visit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARE PROMISES -->
+    <section class="section stories-section">
+      <div class="wrap">
+        <h2 class="section-title">Patients first, always</h2>
+        <div class="story-grid">
+          <blockquote>Clear explanations<cite>We explain the options, timing, and next steps before treatment begins.</cite></blockquote>
+          <blockquote>Comfort-led care<cite>Our team works at your pace and makes room for questions.</cite></blockquote>
+          <blockquote>Simple scheduling<cite>See open times, reserve online, and manage your booking with one code.</cite></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOURS & LOCATION -->
+    <section id="hours" class="section">
+      <div class="wrap hours-grid">
+        <div>
+          <h2 class="section-title">Hours</h2>
+          <table class="hours-table" id="hoursTable">
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="location-card">
+          <h2 class="section-title">Location &amp; contact</h2>
+          <p id="clinicAddress">—</p>
+          <p><a id="clinicPhone" href="#"></a></p>
+          <p><a id="clinicEmail" href="#"></a></p>
+          <h3 class="doctors-title">Our dentists</h3>
+          <ul class="doctors-list" id="doctorsList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- MANAGE BOOKING -->
+    <section id="manage" class="section section-alt">
+      <div class="wrap">
+        <h2 class="section-title">Manage an existing booking</h2>
+        <p class="section-sub">Enter your confirmation code to view or cancel a reservation.</p>
+        <form id="lookupForm" class="lookup-form">
+          <input type="text" id="lookupCode" placeholder="e.g. 4F9A2C1B" required />
+          <button type="submit" class="btn btn-ghost">Look up</button>
+        </form>
+        <div id="lookupResult" class="lookup-result"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© <span id="year"></span> Brightside Dental</span>
+      <span>Built as a lightweight demo — frontend + backend, no heavy frameworks.</span>
+    </div>
+  </footer>
+
+  <!-- CHATBOT -->
+  <div class="chatbot" id="chatbot">
+    <button type="button" class="chat-toggle" id="chatToggle" aria-label="Open chat assistant">💬</button>
+    <div class="chat-window" id="chatWindow" hidden>
+      <div class="chat-header">
+        <span>Brightside Assistant</span>
+        <button type="button" class="chat-close" id="chatClose" aria-label="Close chat">✕</button>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <form class="chat-input-row" id="chatForm">
+        <input type="text" id="chatInput" placeholder="Ask about hours, services, booking…" autocomplete="off" />
+        <button type="submit" class="chat-send" aria-label="Send">➤</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

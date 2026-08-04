@@ -1,0 +1,4 @@
+node_modules/
+dental.db
+dental.db-*
+.env
